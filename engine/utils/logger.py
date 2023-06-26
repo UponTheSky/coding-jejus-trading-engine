@@ -2,6 +2,9 @@ from typing import Literal
 import logging
 
 
+Logger = logging.Logger
+
+
 def get_logger(
   *,
   classname: str,
