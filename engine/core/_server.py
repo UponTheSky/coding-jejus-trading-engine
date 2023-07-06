@@ -1,6 +1,6 @@
 from typing import final, Final, Any
 
-from engine.utils.logger import get_logger, Logger
+from engine.logger import get_logger, Logger
 
 from ._interface import TradingEngineServerInterface
 from ._config import Config
