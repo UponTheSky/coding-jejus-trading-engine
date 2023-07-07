@@ -1,6 +1,6 @@
 from typing import final, Final, Any
 
-from engine.logger import get_logger, Logger
+from engine.logger import TextLoggerInterface
 
 from ._interface import TradingEngineServerInterface
 from ._config import Config
@@ -8,14 +8,11 @@ from ._config import Config
 
 @final
 class TradingEngineServer(TradingEngineServerInterface):
-  _logger: Final[Logger]
+  _logger: Final[TextLoggerInterface]
   _config: Final[Config]
 
-  def __init__(self, *, config: Config):
-    self._logger = get_logger(
-      classname=self.__class__.__name__,
-      environment="development"
-    )
+  def __init__(self, *, config: Config, logger: TextLoggerInterface):
+    self._logger = logger
     self._config = config
 
   async def run(self) -> Any:

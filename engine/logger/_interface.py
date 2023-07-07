@@ -1,14 +1,8 @@
 from typing import Union
 from abc import ABC, abstractmethod
-from enum import Enum
 import traceback
 
-
-class LogLevel(str, Enum):
-  DEBUG = "DEBUG"
-  INFO = "INFO"
-  WARNING = "WARNING"
-  ERROR = "ERROR"
+from ._logger_types import LogLevel
 
 
 class LoggerInterface(ABC):
@@ -28,8 +22,8 @@ class LoggerInterface(ABC):
   def error(self, *, module: str, content: Union[str, Exception]) -> None:
     ...
 
-class AbstractLogger(LoggerInterface):
-  def debug(self, *, module: str, content: Union[str, Excepetion]) -> None:
+class AbstractLogger(LoggerInterface, ABC):
+  def debug(self, *, module: str, content: Union[str, Exception]) -> None:
     self._log(
       level=LogLevel.DEBUG,
       module=module,

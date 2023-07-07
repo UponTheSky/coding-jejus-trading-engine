@@ -9,8 +9,12 @@ from ._server import TradingEngineServer
 from ._host_builder import TradingEngineServerHostBuilder
 from ._service_provider import TradingEngineServiceProvider
 
+
 trading_engine_service_provider = TradingEngineServiceProvider()
-trading_engine_service_provider.service_provider = TradingEngineServer(config=get_config())
+trading_engine_service_provider.service_provider = TradingEngineServer(
+  config=get_config(),
+  logger=...
+)
 
 __all__ = [
   "get_config",

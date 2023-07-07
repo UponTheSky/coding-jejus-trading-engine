@@ -6,6 +6,18 @@ from .core import (
   TradingEngineServerHostBuilder
 )
 
+from .logger import LoggingConfig, TextLoggerConfig, LoggerType
+
+
+text_logger_config = TextLoggerConfig(
+  directory="",
+  filename="trading_engine_server",
+  file_extention=".log"
+)
+
+logging_config = LoggingConfig(logger_type=LoggerType.TEXT)
+
+
 async def app(scope, receive, send) -> None:
   # TODO: refactor this function
   await send({
