@@ -1,6 +1,8 @@
 from typing import Union
-from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod, abstractproperty
 import traceback
+import threading
+from datetime import datetime
 
 from ._logger_types import LogLevel
 
@@ -53,6 +55,10 @@ class AbstractLogger(LoggerInterface, ABC):
 
   @abstractmethod
   def _log(self, *, level: LogLevel, module: str, message: str) -> None:
+    ...
+
+  @abstractproperty
+  def event(self) -> threading.Event:
     ...
 
   @staticmethod

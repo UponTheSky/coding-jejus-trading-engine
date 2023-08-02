@@ -1,21 +1,8 @@
-from typing import Any
-
 from .core import (
   trading_engine_service_provider,
   get_config,
   TradingEngineServerHostBuilder
 )
-
-from .logger import LoggingConfig, TextLoggerConfig, LoggerType
-
-
-text_logger_config = TextLoggerConfig(
-  directory="",
-  filename="trading_engine_server",
-  file_extention=".log"
-)
-
-logging_config = LoggingConfig(logger_type=LoggerType.TEXT)
 
 
 async def app(scope, receive, send) -> None:
