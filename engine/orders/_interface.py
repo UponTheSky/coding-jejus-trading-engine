@@ -83,3 +83,13 @@ class RetrievalOrderBookInterface(OrderEntryOrderBookInterface, ABC):
   @abstractmethod
   def get_bid_orders(self) -> list[Any]:
     ...
+
+
+class MatchResult:
+  ...
+
+
+class MatchingOrderInterface(RetrievalOrderBookInterface, ABC):
+  @abstractmethod
+  def match(self) -> MatchResult:
+    ...

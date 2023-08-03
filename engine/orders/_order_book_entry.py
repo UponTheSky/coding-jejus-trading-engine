@@ -35,17 +35,23 @@ class Limit:
   head: OrderBookEntry
   tail: OrderBookEntry
   _side: Side
+  _price: int
 
-  def __init__(self) -> None:
+  def __init__(self, *, price: int) -> None:
     self.head = _make_dummy_order_book_entry()
     self.tail = _make_dummy_order_book_entry()
     self._side = Side.UNKNOWN
+    self._price = price
 
     self.head.next = self.tail
     self.tail.previous = self.head
 
   def is_empty(self) -> bool:
     return self.head.next == self.tail
+
+  @property
+  def price(self) -> int:
+    return self._price
 
   @property
   def side(self) -> Side:
@@ -98,7 +104,7 @@ class Limit:
     return order_records
 
 
-def limit_comparer(x: Limit, y: Limit, is_bid: bool = True) -> int:
+def _limit_comparer(x: Limit, y: Limit, is_bid: bool = True) -> int:
   ret = 0
 
   if x.price < y.price:
@@ -111,6 +117,14 @@ def limit_comparer(x: Limit, y: Limit, is_bid: bool = True) -> int:
     ret *= -1
 
   return ret
+
+
+def bid_limit_comparer(x: Limit, y: Limit) -> int:
+  return _limit_comparer(x, y)
+
+
+def ask_limit_comparer(x: Limit, y: Limit) -> int:
+  return _limit_comparer(x, y, False)
 
 
 class OrderBookEntry:
